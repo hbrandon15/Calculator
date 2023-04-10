@@ -12,11 +12,31 @@ app.get("/", function (req, res) {
 
 app.post("/", function (req, res) {
   // Need to convert to a Number since originally it is text
-  var num1 = Number(req.body.num1); 
+  var num1 = Number(req.body.num1);
   var num2 = Number(req.body.num2);
 
   var result = num1 + num2;
   res.send("The result of the calculation is " + result);
+});
+
+// Create BMI route
+
+// Create root route
+app.get("/bmicalculator", function (req, res) {
+  res.sendFile(__dirname + "/bmiCalculator.html");
+});
+
+app.post("/bmicalculator", function (req, res) {
+  var weight = Number(req.body.weight);
+  var height = Number(req.body.height);
+
+  var n = weight / (height * height);
+
+  res.send(
+    "Your BMI is " +
+      n +
+      " where n is equal to the calculated BMI based on their weight and height inputs."
+  );
 });
 // listening on port 3000
 app.listen(3000, function () {
